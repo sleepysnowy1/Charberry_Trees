@@ -11,13 +11,14 @@ namespace Charberry_Trees
         private Random _random = new Random();
         public bool Ripe { get; set; }
 
-        public 
+        public event Func<bool>? Ripened;
 
         public void MaybeGrow()
         {
             if(_random.NextDouble() < 0.00000001 && !Ripe)
             {
                 Ripe = true;
+                Ripe = Ripened?.Invoke(); 
             }
         }
     }
